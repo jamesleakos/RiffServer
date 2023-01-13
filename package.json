@@ -1,0 +1,29 @@
+{
+  "name": "riffserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx nodemon server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BlueOceanDevelopment/RiffServer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BlueOceanDevelopment/RiffServer/issues"
+  },
+  "homepage": "https://github.com/BlueOceanDevelopment/RiffServer#readme",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "pg-pool": "^3.5.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
+  }
+}
