@@ -1,1 +1,1 @@
-exports.test = require('./test');
+exports.messages = require('./messages');
