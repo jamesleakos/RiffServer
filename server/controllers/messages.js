@@ -52,7 +52,6 @@ module.exports = {
   },
 
   createUser: (req, res) => {
-    console.log(req.body)
     models.messages.createUser(req.body.username, req.body.password)
       .then(() => {
         res.status(201).send();
@@ -78,12 +77,12 @@ module.exports = {
         res.status(201).send();
       })
       .catch((err) => {
-        res.status(501);
+        res.status(501).send();
       })
   },
 
   createChannel: (req, res) => {
-    model.messages.createChannel(req.body.channel_name, req.body.server_id)
+    models.messages.createChannel(req.body.channel_name, req.body.server_id)
       .then(() => {
         res.status(201).send();
       })
@@ -93,7 +92,7 @@ module.exports = {
   },
 
   addFriend: (req, res) => {
-    model.messages.addFriend(req.body.user_id, req.body.friend_id)
+    models.messages.addFriend(req.body.user_id, req.body.friend_id)
       .then(() => {
         res.status(201).send();
       })
@@ -103,7 +102,7 @@ module.exports = {
   },
 
   inviteUser: (req, res) => {
-    model.messages.inviteUser(req.query.user_id, req.query.server_id)
+    models.messages.inviteUser(req.params.server_id, req.params.user_id)
       .then(() => {
         res.status(201).send();
       })

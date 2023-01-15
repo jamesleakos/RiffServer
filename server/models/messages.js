@@ -36,7 +36,7 @@ module.exports = {
     },
 
     getFriends: (user_id) => {
-      return db.query(`SELECT * FROM friends WHERE user_id=${user_id}`)
+      return db.query(`SELECT username FROM users WHERE id = (SELECT friend_id FROM friends WHERE user_id=${user_id})`)
         .then((result) => {
           return result.rows;
         })
@@ -48,7 +48,10 @@ module.exports = {
     createUser: (username, password) => {
       const queryString = `INSERT INTO users (username, password) VALUES ($1, $2)`
 
-      return db.query(queryString, [username, password]);
+      return db.query(queryString, [username, password])
+        .catch((err) => {
+          return err;
+        })
     },
 
     postMessage: (message, server_id, channel_id, user_id, recipient_id) => {
@@ -58,17 +61,18 @@ module.exports = {
     },
 
     createServer: (server_name, private, admin_id) => {
-      const createServerQuery = `INSERT INTO servers (server_name, private, admin_id) VALUES ($1, $2, $3)`
+      const createServerQuery = `INSERT INTO servers (server_name, private, admin_id) VALUES ($1, $2, $3) RETURNING id`
+
+      const createDefaultChannelQuery = `INSERT INTO channels (channel_name, server_id) VALUES ($1, $2)`
 
       const addUserToServerQuery = `INSERT INTO servers_users (user_id, server_id) VALUES ($1, $2)`
 
-      return db.query(queryString, [server_name, private, admin_id])
-        .then(() => {
-          return db.query(`SELECT id FROM servers WHERE server_name=${server_name} AND admin_id=${admin_id}`)
-        })
+      let server_id;
+
+      return db.query(createServerQuery, [server_name, private, admin_id])
         .then((result) => {
-          const server_id = result.rows[0]
-          return db.query(addUserToServerQuery, [admin_id, server_id])
+          server_id = result.rows[0].id
+          return Promise.all(db.query(createDefaultChannelQuery, ['general', server_id]), db.query(addUserToServerQuery, [admin_id, server_id]))
         })
         .catch((err) => {
           return err;
@@ -78,18 +82,29 @@ module.exports = {
     createChannel: (channel_name, server_id) => {
       const queryString = `INSERT INTO channels (channel_name, server_id) VALUES ($1, $2)`
 
-      return db.query(queryString, [channel_id, server_id]);
+      return db.query(queryString, [channel_name, server_id])
+        .catch((err) => {
+          return err;
+        })
     },
 
     addFriend: (user_id, friend_id) => {
       const queryString = `INSERT INTO friends (user_id, friend_id) VALUES ($1, $2)`
 
-      return db.query(queryString, [user_id, friend_id]);
+      return db.query(queryString, [user_id, friend_id])
+        .catch((err) => {
+          return err;
+        } )
     },
 
-    inviteUser: (user_id, server_id) => {
-      const queryString = `INSERT INTO servers_users (user_id, server_id) VALUE ($1, $2)`
+    inviteUser: (server_id, user_id) => {
+      console.log(server_id)
+      const queryString = `INSERT INTO servers_users (user_id, server_id) VALUES ($1, $2)`
 
-      return db.query(queryString, [user_id, server_id]);
+      return db.query(queryString, [user_id, server_id])
+        .catch((err) => {
+          console.log(err);
+          return err;
+        })
     }
 };

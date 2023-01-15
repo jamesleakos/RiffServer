@@ -19,7 +19,7 @@ router.post('/servers', controllers.messages.createServer);
 
 router.post('/channels', controllers.messages.createChannel);
 
-router.post('friends', controllers.messages.addFriend);
+router.post('/friends', controllers.messages.addFriend);
 
 router.post('/servers/:server_id/:user_id', controllers.messages.inviteUser);
 
