@@ -1,63 +1,23 @@
 const models = require('../models');
 
 module.exports = {
-  getUserId: (req, res) => {
-    models.messages.getUserId (req.params.username)
-      .then((userInfo) => {
-        res.status(200).send(userInfo);
-      })
-      .catch((err) => {
-        res.status(501).send();
-      });
-  },
-
   getMessages: (req, res) => {
-    models.messages.getMessages(req.query.server_id, req.query.channel_id)
+    models.messages.getMessages(req.params.server_id, req.params.channel_id)
       .then((messages) => {
         res.status(200).send(messages);
       })
       .catch((err) => {
-        res.status(501).send();
+        res.status(501).send(err);
       });
   },
 
-  getServers: (req, res) => {
-    models.messages.getServers(req.query.user_id)
-      .then((servers) => {
-        res.status(200).send(servers);
+  getDirectMessages: (req, res) => {
+    models.messages.getDirectMessages(req.params.user_id, req.params.recipient_id)
+      .then((directMessages) => {
+        res.status(200).send(directMessages)
       })
       .catch((err) => {
-        res.status(501).send();
-      });
-  },
-
-  getChannels: (req, res) => {
-    models.messages.getChannels(req.query.server_id)
-      .then((channels) => {
-        res.status(200).send(channels);
-      })
-      .catch((err) => {
-        res.status(501).send();
-      })
-  },
-
-  getFriends: (req, res) => {
-    models.messages.getFriends(req.query.user_id)
-      .then((friends) => {
-        res.status(200).send(friends);
-      })
-      .catch((err) => {
-        res.status(501).send();
-      })
-  },
-
-  createUser: (req, res) => {
-    models.messages.createUser(req.body.username, req.body.password)
-      .then(() => {
-        res.status(201).send();
-      })
-      .catch((err) => {
-        res.status(501).send();
+        res.status(501).send(err)
       })
   },
 
@@ -67,48 +27,8 @@ module.exports = {
         res.status(201).send();
       })
       .catch((err) => {
-        res.status(501).send();
+        res.status(501).send(err);
       });
   },
-
-  createServer: (req, res) => {
-    models.messages.createServer(req.body.server_name, req.body.private, req.body.admin_id)
-      .then(() => {
-        res.status(201).send();
-      })
-      .catch((err) => {
-        res.status(501).send();
-      })
-  },
-
-  createChannel: (req, res) => {
-    models.messages.createChannel(req.body.channel_name, req.body.server_id)
-      .then(() => {
-        res.status(201).send();
-      })
-      .catch((err) => {
-        res.status(501).send();
-      })
-  },
-
-  addFriend: (req, res) => {
-    models.messages.addFriend(req.body.user_id, req.body.friend_id)
-      .then(() => {
-        res.status(201).send();
-      })
-      .catch((err) => {
-        res.status(501).send();
-      })
-  },
-
-  inviteUser: (req, res) => {
-    models.messages.inviteUser(req.params.server_id, req.params.user_id)
-      .then(() => {
-        res.status(201).send();
-      })
-      .catch((err) => {
-        res.status(501).send();
-      })
-  }
 
 }

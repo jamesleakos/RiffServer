@@ -1,27 +1,30 @@
 const router = require('express').Router();
 const controllers = require('./controllers');
 
-router.get('/users/:username', controllers.messages.getUserId);
+router.get('/users/:username', controllers.users.getUserId);
 
 router.get('/messages/:server_id/:channel_id', controllers.messages.getMessages);
 
-router.get('/servers/:user_id', controllers.messages.getServers);
+router.get('/directmessages/:user_id/:recipient_id', controllers.messages.getDirectMessages);
 
-router.get('/channels/:server_id', controllers.messages.getChannels);
+router.get('/servers/:user_id', controllers.servers.getServers);
 
-router.get('/friends/:user_id', controllers.messages.getFriends);
+router.get('/server/:server_id/users', controllers.servers.getUsersInServer);
 
-router.post('/users', controllers.messages.createUser);
+router.get('/channels/:server_id', controllers.channels.getChannels);
+
+router.get('/friends/:user_id', controllers.users.getFriends);
+
+router.post('/users', controllers.users.createUser);
 
 router.post('/messages', controllers.messages.postMessage);
 
-router.post('/servers', controllers.messages.createServer);
+router.post('/servers', controllers.servers.createServer);
 
-router.post('/channels', controllers.messages.createChannel);
+router.post('/servers/:server_id/:user_id', controllers.servers.inviteUser);
 
-router.post('/friends', controllers.messages.addFriend);
+router.post('/channels', controllers.channels.createChannel);
 
-router.post('/servers/:server_id/:user_id', controllers.messages.inviteUser);
-
+router.post('/friends', controllers.users.addFriend);
 
 module.exports = router;
