@@ -12,20 +12,23 @@ DROP TABLE IF EXISTS friends CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL NOT NULL PRIMARY KEY,
-  username TEXT,
+  username TEXT UNIQUE,
   password TEXT
-);
-
-CREATE TABLE IF NOT EXISTS channels (
-  id SERIAL NOT NULL PRIMARY KEY,
-  channel_name TEXT
 );
 
 CREATE TABLE IF NOT EXISTS servers (
   id SERIAL NOT NULL PRIMARY KEY,
   server_name TEXT,
   private BOOLEAN,
-  admin_id INTEGER NOT NULL REFERENCES users (id)
+  admin_id INTEGER NOT NULL REFERENCES users (id),
+  UNIQUE (server_name, admin_id)
+);
+
+CREATE TABLE IF NOT EXISTS channels (
+  id SERIAL NOT NULL PRIMARY KEY,
+  channel_name TEXT,
+  server_id INTEGER REFERENCES servers (id),
+  UNIQUE(channel_name, server_id)
 );
 
 CREATE TABLE IF NOT EXISTS messages (
@@ -34,7 +37,8 @@ CREATE TABLE IF NOT EXISTS messages (
   server_id INTEGER REFERENCES servers (id),
   channel_id INTEGER REFERENCES channels (id),
   user_id INTEGER NOT NULL REFERENCES users (id),
-  recipient_id INTEGER
+  recipient_id INTEGER,
+  created_at TEXT
 );
 
 CREATE TABLE IF NOT EXISTS friends (
@@ -42,3 +46,9 @@ CREATE TABLE IF NOT EXISTS friends (
   user_id INTEGER,
   friend_id INTEGER
 );
+
+CREATE TABLE IF NOT EXISTS servers_users (
+  id SERIAL NOT NULL PRIMARY KEY,
+  user_id INTEGER REFERENCES users (id),
+  server_id INTEGER REFERENCES servers (id)
+)
