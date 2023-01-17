@@ -22,9 +22,10 @@ module.exports = {
   },
 
   postMessage: (req, res) => {
-    models.messages.postMessage(req.body.message, req.body.server_id, req.body.channel_id, req.body.user_id, req.body.recipient_id)
+    const { message, server_id, channel_id, user_id, recipient_id } = req.body.message;
+    models.messages.postMessage(message, server_id, channel_id, user_id, recipient_id)
       .then(() => {
-        res.status(201).send();
+        res.status(201).send(req.body);
       })
       .catch((err) => {
         res.status(501).send(err);

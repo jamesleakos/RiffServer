@@ -23,7 +23,6 @@ module.exports = {
 
     postMessage: (message, server_id, channel_id, user_id, recipient_id) => {
       const queryString = `INSERT INTO messages (message, server_id, channel_id, user_id, recipient_id, created_at) VALUES ($1, $2, $3, $4, $5, $6)`
-
       return db.query(queryString, [message, server_id, channel_id, user_id, recipient_id, Date.now()])
     },
 
