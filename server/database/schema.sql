@@ -9,12 +9,21 @@ DROP TABLE IF EXISTS channels CASCADE;
 DROP TABLE IF EXISTS servers CASCADE;
 DROP TABLE IF EXISTS messages CASCADE;
 DROP TABLE IF EXISTS friends CASCADE;
+DROP TABLE IF EXISTS servers_users CASCADE;
 
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL NOT NULL PRIMARY KEY,
   username TEXT UNIQUE,
-  password TEXT
+  firebase_id TEXT,
+  online BOOLEAN
 );
+
+COPY users
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/users.csv'
+DELIMITER ','
+CSV HEADER;
+
+SELECT setval('users_id_seq', max(id)) FROM users;
 
 CREATE TABLE IF NOT EXISTS servers (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -24,12 +33,26 @@ CREATE TABLE IF NOT EXISTS servers (
   UNIQUE (server_name, admin_id)
 );
 
+COPY servers
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/servers.csv'
+DELIMITER ','
+CSV HEADER;
+
+SELECT setval('servers_id_seq', max(id)) FROM servers;
+
 CREATE TABLE IF NOT EXISTS channels (
   id SERIAL NOT NULL PRIMARY KEY,
   channel_name TEXT,
   server_id INTEGER REFERENCES servers (id),
   UNIQUE(channel_name, server_id)
 );
+
+COPY channels
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/channels.csv'
+DELIMITER ','
+CSV HEADER;
+
+SELECT setval('channels_id_seq', max(id)) FROM channels;
 
 CREATE TABLE IF NOT EXISTS messages (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -41,14 +64,36 @@ CREATE TABLE IF NOT EXISTS messages (
   created_at TEXT
 );
 
+COPY messages
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/messages.csv'
+DELIMITER ','
+CSV HEADER
+NULL AS '0';
+
+SELECT setval('messages_id_seq', max(id)) FROM messages;
+
 CREATE TABLE IF NOT EXISTS friends (
   id SERIAL NOT NULL PRIMARY KEY,
   user_id INTEGER,
   friend_id INTEGER
 );
 
+COPY friends
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/friends.csv'
+DELIMITER ','
+CSV HEADER;
+
+SELECT setval('friends_id_seq', max(id)) FROM friends;
+
 CREATE TABLE IF NOT EXISTS servers_users (
   id SERIAL NOT NULL PRIMARY KEY,
-  user_id INTEGER REFERENCES users (id),
-  server_id INTEGER REFERENCES servers (id)
-)
+  user_id INTEGER,
+  server_id INTEGER
+);
+
+COPY servers_users
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/servers_users.csv'
+DELIMITER ','
+CSV HEADER;
+
+SELECT setval('servers_users_id_seq', max(id)) FROM servers_users;
