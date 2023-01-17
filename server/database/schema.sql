@@ -14,7 +14,8 @@ DROP TABLE IF EXISTS servers_users CASCADE;
 CREATE TABLE IF NOT EXISTS users (
   id SERIAL NOT NULL PRIMARY KEY,
   username TEXT UNIQUE,
-  firebase_id TEXT
+  firebase_id TEXT,
+  online BOOLEAN
 );
 
 COPY users
