@@ -18,9 +18,11 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 COPY users
-FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/users.csv'
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/users.csv'
 DELIMITER ','
 CSV HEADER;
+
+SELECT setval('users_id_seq', max(id)) FROM users;
 
 CREATE TABLE IF NOT EXISTS servers (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -31,9 +33,11 @@ CREATE TABLE IF NOT EXISTS servers (
 );
 
 COPY servers
-FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/servers.csv'
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/servers.csv'
 DELIMITER ','
 CSV HEADER;
+
+SELECT setval('servers_id_seq', max(id)) FROM servers;
 
 CREATE TABLE IF NOT EXISTS channels (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -43,9 +47,11 @@ CREATE TABLE IF NOT EXISTS channels (
 );
 
 COPY channels
-FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/channels.csv'
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/channels.csv'
 DELIMITER ','
 CSV HEADER;
+
+SELECT setval('channels_id_seq', max(id)) FROM channels;
 
 CREATE TABLE IF NOT EXISTS messages (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -58,10 +64,12 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 
 COPY messages
-FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/messages.csv'
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/messages.csv'
 DELIMITER ','
 CSV HEADER
 NULL AS '0';
+
+SELECT setval('messages_id_seq', max(id)) FROM messages;
 
 CREATE TABLE IF NOT EXISTS friends (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -70,9 +78,11 @@ CREATE TABLE IF NOT EXISTS friends (
 );
 
 COPY friends
-FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/friends.csv'
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/friends.csv'
 DELIMITER ','
 CSV HEADER;
+
+SELECT setval('friends_id_seq', max(id)) FROM friends;
 
 CREATE TABLE IF NOT EXISTS servers_users (
   id SERIAL NOT NULL PRIMARY KEY,
@@ -81,6 +91,8 @@ CREATE TABLE IF NOT EXISTS servers_users (
 );
 
 COPY servers_users
-FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/servers_users.csv'
+FROM '/Users/jonathan/HackReactor/blueOcean/RiffServer/data/servers_users.csv'
 DELIMITER ','
 CSV HEADER;
+
+SELECT setval('servers_users_id_seq', max(id)) FROM servers_users;
