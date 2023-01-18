@@ -12,13 +12,11 @@ module.exports = {
   },
 
   getUsersInServer: (server_id) => {
-    return db.query(`SELECT id, username FROM users WHERE id IN (SELECT user_id FROM servers_users WHERE server_id=${server_id})`)
+    return db.query(`SELECT * FROM users WHERE id IN (SELECT user_id FROM servers_users WHERE server_id=${server_id})`)
       .then((result) => {
-        console.log(result)
         return result.rows;
       })
       .catch((err) => {
-        console.log(err)
         return err;
       })
   },
