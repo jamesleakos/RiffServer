@@ -40,5 +40,6 @@ module.exports = {
       .catch((err) => {
         res.status(501).send(err);
       })
-  }
+  },
+
 }
