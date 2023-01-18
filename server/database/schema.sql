@@ -19,11 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 COPY users
-<<<<<<< HEAD
-FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/users.csv'
-=======
 FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/users.csv'
->>>>>>> 006fc09107e249eed4771b99aa864b952afa40e2
 DELIMITER ','
 CSV HEADER;
 
@@ -38,11 +34,7 @@ CREATE TABLE IF NOT EXISTS servers (
 );
 
 COPY servers
-<<<<<<< HEAD
-FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/servers.csv'
-=======
 FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/servers.csv'
->>>>>>> 006fc09107e249eed4771b99aa864b952afa40e2
 DELIMITER ','
 CSV HEADER;
 
@@ -56,11 +48,7 @@ CREATE TABLE IF NOT EXISTS channels (
 );
 
 COPY channels
-<<<<<<< HEAD
-FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/channels.csv'
-=======
 FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/channels.csv'
->>>>>>> 006fc09107e249eed4771b99aa864b952afa40e2
 DELIMITER ','
 CSV HEADER;
 
@@ -77,11 +65,7 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 
 COPY messages
-<<<<<<< HEAD
-FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/messages.csv'
-=======
 FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/messages.csv'
->>>>>>> 006fc09107e249eed4771b99aa864b952afa40e2
 DELIMITER ','
 CSV HEADER
 NULL AS '0';
@@ -95,11 +79,7 @@ CREATE TABLE IF NOT EXISTS friends (
 );
 
 COPY friends
-<<<<<<< HEAD
-FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/friends.csv'
-=======
 FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/friends.csv'
->>>>>>> 006fc09107e249eed4771b99aa864b952afa40e2
 DELIMITER ','
 CSV HEADER;
 
@@ -112,11 +92,7 @@ CREATE TABLE IF NOT EXISTS servers_users (
 );
 
 COPY servers_users
-<<<<<<< HEAD
-FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/servers_users.csv'
-=======
 FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/servers_users.csv'
->>>>>>> 006fc09107e249eed4771b99aa864b952afa40e2
 DELIMITER ','
 CSV HEADER;
 
