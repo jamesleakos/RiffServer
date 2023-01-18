@@ -19,7 +19,7 @@ CREATE TABLE IF NOT EXISTS users (
 );
 
 COPY users
-FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/users.csv'
+FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/data/users.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS servers (
 );
 
 COPY servers
-FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/servers.csv'
+FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/servers.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS channels (
 );
 
 COPY channels
-FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/channels.csv'
+FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/channels.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -65,7 +65,7 @@ CREATE TABLE IF NOT EXISTS messages (
 );
 
 COPY messages
-FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/messages.csv'
+FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/messages.csv'
 DELIMITER ','
 CSV HEADER
 NULL AS '0';
@@ -79,7 +79,7 @@ CREATE TABLE IF NOT EXISTS friends (
 );
 
 COPY friends
-FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/friends.csv'
+FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/friends.csv'
 DELIMITER ','
 CSV HEADER;
 
@@ -92,7 +92,7 @@ CREATE TABLE IF NOT EXISTS servers_users (
 );
 
 COPY servers_users
-FROM '/Users/jamesleakos/Documents/Development/HackReactor/blue-ocean/RiffServer/data/servers_users.csv'
+FROM '/Users/christopherwong/Documents/Hack reactor/bootcamp/BlueOceanDevelopment/RiffServer/data/servers_users.csv'
 DELIMITER ','
 CSV HEADER;
 
