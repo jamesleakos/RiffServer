@@ -1,8 +1,11 @@
 const path = require('path');
+require('dotenv').config();
 const { Pool } = require('pg')
 
 const pool = new Pool({
-  database: 'riff'
+  database: 'riff',
+  user: process.env.DBUSER,
+  password: process.env.DBPASS,
 });
 
 module.exports = {
