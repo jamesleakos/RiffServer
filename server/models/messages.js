@@ -2,11 +2,12 @@ const db = require('../database/db')
 
 module.exports = {
   getMessages: (server_id, channel_id) => {
-    return db.query(`SELECT * FROM messages WHERE server_id=${server_id} AND channel_id=${channel_id}`)
+    return db.query(`SELECT *, (SELECT username FROM users WHERE id = messages.user_id) FROM messages WHERE server_id=${server_id} AND channel_id=${channel_id}`)
       .then((result) => {
         return result.rows;
       })
       .catch((err) => {
+        console.log(err)
         return err;
       });
     },
