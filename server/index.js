@@ -6,7 +6,7 @@ const router = require('./router');
 const app = express();
 const server = require('http').Server(app);
 // const io = require('socket.io')(server);
-const axios = require('axios');
+const controllers = require('./controllers');
 
 app.use(express.json());
 
@@ -27,9 +27,9 @@ const socketIO = require('socket.io')(server, {
 socketIO.on('connection', (socket) => {
   console.log("connected", socket.id)
   socket.on('message', (message) => {
-    axios.post(`http://localhost:3000/messages`, { message })
+    controllers.messages._postMessage(message)
       .then(response => {
-        socketIO.emit('new_message', response.data.message);
+        socketIO.emit('new_message', response);
       })
       .catch(error => {
         console.log(error);
