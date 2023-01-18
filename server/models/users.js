@@ -12,7 +12,7 @@ module.exports = {
   },
 
   getFriends: (user_id) => {
-    return db.query(`SELECT id, username FROM users WHERE id IN (SELECT friend_id FROM friends WHERE user_id=${user_id})`)
+    return db.query(`SELECT id, username, online FROM users WHERE id IN (SELECT friend_id FROM friends WHERE user_id=${user_id})`)
       .then((result) => {
         return result.rows;
       })
