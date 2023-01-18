@@ -45,7 +45,7 @@ module.exports = {
     const { message, server_id, channel_id, user_id, recipient_id } = newMessage;
     return models.messages.postMessage(message, server_id, channel_id, user_id, recipient_id)
       .then(() => {
-        return newMessage;
+        return {...newMessage, created_at: Date.now()};
       })
       .catch((err) => {
         console.log(err);
