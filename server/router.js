@@ -17,7 +17,7 @@ router.get('/friends/:user_id', controllers.users.getFriends);
 
 router.post('/users', controllers.users.createUser);
 
-router.post('/messages', controllers.messages.postMessage);
+// router.post('/messages', controllers.messages.postMessage);
 
 router.post('/servers', controllers.servers.createServer);
 

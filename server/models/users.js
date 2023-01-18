@@ -21,10 +21,10 @@ module.exports = {
       })
   },
 
-  createUser: (username, password) => {
-    const queryString = `INSERT INTO users (username, password) VALUES ($1, $2)`
+  createUser: (username, firebase_id) => {
+    const queryString = `INSERT INTO users (username, firebase_id) VALUES ($1, $2)`
 
-    return db.query(queryString, [username, password])
+    return db.query(queryString, [username, firebase_id])
       .catch((err) => {
         return err;
       })
@@ -37,6 +37,16 @@ module.exports = {
       .catch((err) => {
         return err;
       } )
+  },
+
+  getUserIdFromFirebaseId: (firebaseId) => {
+    return db.query(`SELECT id FROM users WHERE firebase_id='${firebaseId}'`)
+      .then(result => {
+        return result.rows[0].firebase_id;
+      })
+      .catch(err => {
+        return err;
+      })
   }
 
 }

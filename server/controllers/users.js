@@ -22,7 +22,8 @@ module.exports = {
   },
 
   createUser: (req, res) => {
-    models.users.createUser(req.body.username, req.body.password)
+    console.log('create user');
+    models.users.createUser(req.body.username, req.body.firebase_id)
       .then(() => {
         res.status(201).send();
       })
