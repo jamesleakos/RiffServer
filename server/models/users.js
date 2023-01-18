@@ -47,6 +47,15 @@ module.exports = {
       .catch(err => {
         return err;
       })
-  }
+  },
+  getUsername: (id) => {
+    return db.query(`SELECT username FROM users WHERE id='${id}'`)
+      .then((result) => {
+        return result.rows[0].username;
+      })
+      .catch((err) => {
+        return err;
+      });
+  },
 
 }
