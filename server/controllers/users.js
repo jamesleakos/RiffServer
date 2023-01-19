@@ -45,7 +45,7 @@ module.exports = {
   removeFriend: (req, res) => {
     models.users.removeFriend(req.body.user_id, req.body.friend_id)
       .then(() => {
-        res.status(201).send();
+        res.status(202).send();
       })
       .catch((err) => {
         res.status(501).send(err);
