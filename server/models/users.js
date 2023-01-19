@@ -2,7 +2,7 @@ const db = require('../database/db');
 
 module.exports = {
   getUserId: (firebase_id) => {
-    return db.query(`SELECT id FROM users WHERE firebase_id='${firebase_id}'`)
+    return db.query(`SELECT id, username FROM users WHERE firebase_id='${firebase_id}'`)
       .then((result) => {
         return result.rows[0];
       })

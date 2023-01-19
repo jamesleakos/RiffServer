@@ -33,6 +33,8 @@ module.exports = {
   },
 
   addFriend: (req, res) => {
+    console.log(req.body.user_id);
+    console.log(req.body.friend_id);
     models.users.addFriend(req.body.user_id, req.body.friend_id)
       .then(() => {
         res.status(201).send();
