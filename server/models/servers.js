@@ -57,6 +57,14 @@ module.exports = {
       })
   },
 
+  renameServer: (server_id, server_name) => {
+    return db.query(`UPDATE servers SET server_name='${server_name}' WHERE id=${server_id}`)
+      .catch((err) => {
+        console.log(err.message)
+        return err;
+      })
+  },
+
   inviteUser: (server_id, username) => {
     const queryString = `INSERT INTO servers_users (user_id, server_id) VALUES ($1, $2)`
 
