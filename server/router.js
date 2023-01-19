@@ -27,6 +27,8 @@ router.post('/channels', controllers.channels.createChannel);
 
 router.post('/friends', controllers.users.addFriend);
 
+router.post('/friends/username', controllers.users.addFriendByUsername);
+
 router.delete('/friends', controllers.users.removeFriend);
 
 router.delete('/servers', controllers.servers.deleteServer);

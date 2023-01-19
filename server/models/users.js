@@ -33,6 +33,19 @@ module.exports = {
       })
   },
 
+  addFriendByUsername: (user_id, friendUsername) => {
+    // const queryString = `INSERT INTO friends (user_id, friend_id) VALUES ($1, $2), ($2, $1)`
+    const queryString = `
+    INSERT INTO friends (user_id, friend_id)
+    VALUES ($1, (
+      SELECT id FROM users WHERE username = '$2')), ((SELECT id FROM users WHERE username = '$2'), $1)`;
+    return db.query(queryString, [user_id, friendUsername])
+      .catch((err) => {
+        console.log('error adding friend: ', err.message);
+        return err;
+      });
+  },
+
   addFriend: (user_id, friend_id) => {
     const queryString = `INSERT INTO friends (user_id, friend_id) VALUES ($1, $2), ($2, $1)`
 
@@ -50,7 +63,7 @@ module.exports = {
       .catch((err) => {
         console.log('error removing friend: ', err.message);
         return err;
-      } )
+      });
   },
 
   getUserIdFromFirebaseId: (firebaseId) => {

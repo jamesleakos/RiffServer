@@ -33,15 +33,23 @@ module.exports = {
   },
 
   addFriend: (req, res) => {
-    console.log(req.body.user_id);
-    console.log(req.body.friend_id);
     models.users.addFriend(req.body.user_id, req.body.friend_id)
       .then(() => {
         res.status(201).send();
       })
       .catch((err) => {
         res.status(501).send(err);
+      });
+  },
+
+  addFriendByUsername: (req, res) => {
+    models.users.addFriendByUsername(req.body.user_id, req.body.username)
+      .then(() => {
+        res.status(201).send();
       })
+      .catch((err) => {
+        res.status(501).send(err);
+      });
   },
   updateOnline: (req, res) => {
     models.users.updateOnline(req.params.user_id, req.body.online)
