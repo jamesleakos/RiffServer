@@ -25,6 +25,8 @@ router.post('/servers/:server_id/:user_id', controllers.servers.inviteUser);
 
 router.post('/channels', controllers.channels.createChannel);
 
-router.post('/friends', controllers.users.addFriend);
+router.post('/addFriends', controllers.users.addFriend);
+
+router.delete('/removeFriends', controllers.users.removeFriend)
 
 module.exports = router;
