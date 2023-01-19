@@ -27,4 +27,6 @@ router.post('/channels', controllers.channels.createChannel);
 
 router.post('/friends', controllers.users.addFriend);
 
+router.put('/users/:user_id', controllers.users.updateOnline);
+
 module.exports = router;

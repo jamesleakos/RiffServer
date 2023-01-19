@@ -60,5 +60,10 @@ module.exports = {
         return err;
       });
   },
-
+  updateOnline: (user_id, onlineStatus) => {
+    return db.query(`UPDATE users SET online = ${onlineStatus} WHERE id=${user_id}`)
+      .catch((err) => {
+        return err;
+      })
+  }
 }
