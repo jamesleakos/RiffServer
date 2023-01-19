@@ -20,4 +20,14 @@ module.exports = {
         res.status(501).send(err);
       })
   },
+
+  deleteChannel: (req, res) => {
+    models.channels.deleteChannel(req.body.channel_name, req.body.server_id)
+      .then(() => {
+        res.status(202).send();
+      })
+      .catch((err) => {
+        res.status(501).send(err);
+      })
+  },
 }

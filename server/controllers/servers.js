@@ -31,6 +31,16 @@ module.exports = {
       })
   },
 
+  deleteServer: (req, res) => {
+    models.servers.deleteServer(req.body.server_name, req.body.private, req.body.admin_id)
+      .then(() => {
+        res.status(202).send();
+      })
+      .catch((err) => {
+        res.status(501).send(err);
+      })
+  },
+
   inviteUser: (req, res) => {
     models.servers.inviteUser(req.params.server_id, req.params.user_id)
       .then(() => {

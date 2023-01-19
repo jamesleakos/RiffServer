@@ -28,6 +28,11 @@ CREATE TABLE IF NOT EXISTS servers (
   UNIQUE (server_name, admin_id)
 );
 
+-- COPY servers
+-- FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/servers.csv'
+-- DELIMITER ','
+-- CSV HEADER;
+
 SELECT setval('servers_id_seq', max(id)) FROM servers;
 
 CREATE TABLE IF NOT EXISTS channels (
@@ -36,6 +41,11 @@ CREATE TABLE IF NOT EXISTS channels (
   server_id INTEGER REFERENCES servers (id),
   UNIQUE(channel_name, server_id)
 );
+
+-- COPY channels
+-- FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/channels.csv'
+-- DELIMITER ','
+-- CSV HEADER;
 
 SELECT setval('channels_id_seq', max(id)) FROM channels;
 
@@ -49,6 +59,12 @@ CREATE TABLE IF NOT EXISTS messages (
   created_at TEXT
 );
 
+-- COPY messages
+-- FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/messages.csv'
+-- DELIMITER ','
+-- CSV HEADER
+-- NULL AS '0';
+
 SELECT setval('messages_id_seq', max(id)) FROM messages;
 
 CREATE TABLE IF NOT EXISTS friends (
@@ -57,6 +73,11 @@ CREATE TABLE IF NOT EXISTS friends (
   friend_id INTEGER
 );
 
+-- COPY friends
+-- FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/friends.csv'
+-- DELIMITER ','
+-- CSV HEADER;
+
 SELECT setval('friends_id_seq', max(id)) FROM friends;
 
 CREATE TABLE IF NOT EXISTS servers_users (
@@ -64,5 +85,10 @@ CREATE TABLE IF NOT EXISTS servers_users (
   user_id INTEGER,
   server_id INTEGER
 );
+
+-- COPY servers_users
+-- FROM '/Users/chris/Desktop/hackreactor/RiffServer/data/servers_users.csv'
+-- DELIMITER ','
+-- CSV HEADER;
 
 SELECT setval('servers_users_id_seq', max(id)) FROM servers_users;

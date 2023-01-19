@@ -13,7 +13,7 @@ module.exports = {
     },
 
     getDirectMessages: (user_id, recipient_id) => {
-      return db.query(`SELECT * FROM messages WHERE user_id=${user_id} AND recipient_id=${recipient_id}`)
+      return db.query(`SELECT * FROM messages WHERE (user_id=${user_id} AND recipient_id=${recipient_id}) OR (user_id=${recipient_id} AND recipient_id=${user_id})`)
         .then((result) => {
           return result.rows;
         })

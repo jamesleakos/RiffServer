@@ -34,7 +34,16 @@ module.exports = {
   },
 
   addFriend: (user_id, friend_id) => {
-    const queryString = `INSERT INTO friends (user_id, friend_id) VALUES ($1, $2)`
+    const queryString = `INSERT INTO friends (user_id, friend_id) VALUES ($1, $2), ($2, $1)`
+
+    return db.query(queryString, [user_id, friend_id])
+      .catch((err) => {
+        return err;
+      } )
+  },
+
+  removeFriend: (user_id, friend_id) => {
+    const queryString = `DELETE FROM friends (user_id, friend_id) VALUES ($1, $2), ($2, $1)`
 
     return db.query(queryString, [user_id, friend_id])
       .catch((err) => {
@@ -60,5 +69,10 @@ module.exports = {
         return err;
       });
   },
-
+  updateOnline: (user_id, onlineStatus) => {
+    return db.query(`UPDATE users SET online = ${onlineStatus} WHERE id=${user_id}`)
+      .catch((err) => {
+        return err;
+      })
+  }
 }
