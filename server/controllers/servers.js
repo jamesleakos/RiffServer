@@ -32,9 +32,20 @@ module.exports = {
   },
 
   deleteServer: (req, res) => {
-    models.servers.deleteServer(req.body.server_name, req.body.private, req.body.admin_id)
+    models.servers.deleteServer(req.params.server_id)
       .then(() => {
+        console.log('del serv control id:', req.params.server_id)
         res.status(202).send();
+      })
+      .catch((err) => {
+        res.status(501).send(err);
+      })
+  },
+
+  renameServer: (req, res) => {
+    models.servers.renameServer(req.params.server_id, req.body.server_name)
+      .then(() => {
+        res.status(201).send(res);
       })
       .catch((err) => {
         res.status(501).send(err);

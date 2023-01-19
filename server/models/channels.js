@@ -20,12 +20,20 @@ module.exports = {
       })
   },
 
-  deleteChannel: (channel_name, server_id) => {
-    const queryString = `DELETE FROM channels (channel_name, server_id) VALUES ($1, $2)`
-
-    return db.query(queryString, [channel_name, server_id])
+  deleteChannel: (channel_id) => {
+    return db.query(`DELETE FROM messages WHERE channel_id=${channel_id}`)
+      .then(()=>{
+        db.query(`DELETE FROM channels WHERE id=${channel_id}`)
+      })
       .catch((err) => {
         return err;
       })
   },
+
+  renameChannel: (channel_id, channel_name) => {
+    return db.query(`UPDATE channels SET channel_name='${channel_name}' WHERE id=${channel_id}`)
+      .catch((err) => {
+        return err;
+      })
+  }
 }
