@@ -41,6 +41,15 @@ module.exports = {
         res.status(501).send(err);
       })
   },
+  updateOnline: (req, res) => {
+    models.users.updateOnline(req.params.user_id, req.body.online)
+      .then(() => {
+        res.status(201).send();
+      })
+      .catch((err) => {
+        res.status(501).send(err);
+      })
+  },
 
   removeFriend: (req, res) => {
     models.users.removeFriend(req.body.user_id, req.body.friend_id)
