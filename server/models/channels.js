@@ -19,4 +19,13 @@ module.exports = {
         return err;
       })
   },
+
+  deleteChannel: (channel_name, server_id) => {
+    const queryString = `DELETE FROM channels (channel_name, server_id) VALUES ($1, $2)`
+
+    return db.query(queryString, [channel_name, server_id])
+      .catch((err) => {
+        return err;
+      })
+  },
 }
