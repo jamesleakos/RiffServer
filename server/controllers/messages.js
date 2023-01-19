@@ -45,7 +45,17 @@ module.exports = {
     const { message, server_id, channel_id, user_id, recipient_id } = newMessage;
     return models.messages.postMessage(message, server_id, channel_id, user_id, recipient_id)
       .then(() => {
-        return {...newMessage, created_at: Date.now()};
+        return models.users.getUsername(user_id)
+          .then((result) => {
+            let obj = {...newMessage, username: result, created_at: Date.now()};
+            console.log(obj)
+            return obj;
+          })
+          .catch(() => {
+            console.log(err);
+            return err;
+          })
+
       })
       .catch((err) => {
         console.log(err);
