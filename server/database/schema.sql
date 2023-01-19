@@ -56,7 +56,8 @@ CREATE TABLE IF NOT EXISTS messages (
   channel_id INTEGER REFERENCES channels (id),
   user_id INTEGER NOT NULL REFERENCES users (id),
   recipient_id INTEGER,
-  created_at TEXT
+  created_at TEXT,
+  reply INTEGER
 );
 
 -- COPY messages
