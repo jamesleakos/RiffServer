@@ -43,7 +43,7 @@ module.exports = {
   },
 
   addFriendByUsername: (req, res) => {
-    models.users.addFriendByUsername(req.body.user_id, req.body.username)
+    models.users.addFriendByUsername(req.body.server, req.body.username)
       .then(() => {
         res.status(201).send();
       })
