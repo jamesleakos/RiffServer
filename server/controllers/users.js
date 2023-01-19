@@ -49,7 +49,7 @@ module.exports = {
       .catch((err) => {
         res.status(501).send(err);
       })
-  }
+  },
 
   removeFriend: (req, res) => {
     models.users.removeFriend(req.body.user_id, req.body.friend_id)
