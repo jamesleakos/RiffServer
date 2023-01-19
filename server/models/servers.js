@@ -40,21 +40,27 @@ module.exports = {
       })
   },
 
-  deleteServer: (server_name, private, admin_id) => {
-    const deleteServerQuery = `DELETE FROM servers (server_name, private, admin_id) VALUES ($1, $2, $3) RETURNING id`
-
-    const deleteDefaultChannelQuery = `DELETE FROM channels (channel_name, server_id) VALUES ($1, $2)`
-
-    const removeUserFromServerQuery = `DELETE FROM servers_users (user_id, server_id) VALUES ($1, $2)`
-
-    let server_id;
-
-    return db.query(deleteServerQuery, [server_name, private, admin_id])
-      .then((result) => {
-        server_id = result.rows[0].id
-        return Promise.all(db.query(deleteDefaultChannelQuery, ['general', server_id]), db.query(removeUserFromServerQuery, [admin_id, server_id]))
+  deleteServer: (server_id) => {
+    console.log('del server models id:', server_id)
+    return db.query(`DELETE FROM messages WHERE channel_id=${server_id}`)
+      .then(() => {
+        db.query(`DELETE FROM servers_users WHERE server_id=${server_id}`)
+      })
+      .then(()=>{
+        db.query(`DELETE FROM channels WHERE server_id=${server_id}`)
+      })
+      .then(()=>{
+        db.query(`DELETE FROM servers WHERE id=${server_id}`)
       })
       .catch((err) => {
+        return err;
+      })
+  },
+
+  renameServer: (server_id, server_name) => {
+    return db.query(`UPDATE servers SET server_name='${server_name}' WHERE id=${server_id}`)
+      .catch((err) => {
+        console.log(err.message)
         return err;
       })
   },

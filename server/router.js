@@ -29,11 +29,14 @@ router.post('/friends', controllers.users.addFriend);
 
 router.delete('/friends', controllers.users.removeFriend);
 
-router.delete('/servers', controllers.servers.deleteServer);
+router.delete('/servers/:server_id', controllers.servers.deleteServer);
 
-router.delete('/channels', controllers.channels.deleteChannel);
+router.delete('/channels/:channel_id', controllers.channels.deleteChannel);
 
 router.put('/users/:user_id', controllers.users.updateOnline);
 
+router.put('/servers/:server_id', controllers.servers.renameServer);
+
+router.put('/channels/:channel_id', controllers.channels.renameChannel);
 
 module.exports = router;
