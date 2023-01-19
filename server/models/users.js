@@ -45,8 +45,6 @@ module.exports = {
 
   removeFriend: (user_id, friend_id) => {
     const queryString = 'DELETE FROM friends WHERE user_id IN ($1, $2) AND friend_id IN ($1, $2)';
-    // console.log(user_id, friend_id);
-// 'DELETE FROM friends WHERE user_id = $1 AND friend_id = $2'
 
     return db.query(queryString, [user_id, friend_id])
       .catch((err) => {

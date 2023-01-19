@@ -54,7 +54,6 @@ module.exports = {
   },
 
   removeFriend: (req, res) => {
-    console.log(req.body.user_id, req.body.friend_id);
     models.users.removeFriend(req.body.user_id, req.body.friend_id)
       .then(() => {
         res.status(202).send();
