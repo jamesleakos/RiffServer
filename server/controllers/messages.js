@@ -49,12 +49,15 @@ module.exports = {
   // },
 
   _postMessage: (newMessage) => {
-    const { message, server_id, channel_id, user_id, recipient_id } = newMessage;
-    return models.messages.postMessage(message, server_id, channel_id, user_id, recipient_id)
-      .then(() => {
+    const { message, server_id, channel_id, user_id, recipient_id, reply } = newMessage;
+    console.log('reply', reply)
+    let id;
+    return models.messages.postMessage(message, server_id, channel_id, user_id, recipient_id, reply)
+      .then((res_id) => {
+        id = res_id;
         return models.users.getUsername(user_id)
           .then((result) => {
-            let obj = {...newMessage, username: result, created_at: Date.now()};
+            let obj = {...newMessage, id: id, username: result, created_at: Date.now()};
             return obj;
           })
           .catch(() => {
