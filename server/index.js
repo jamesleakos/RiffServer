@@ -27,6 +27,7 @@ const socketIO = require('socket.io')(server, {
 socketIO.on('connection', (socket) => {
   console.log("connected", socket.id)
   socket.on('message', (message) => {
+    console.log(message)
     controllers.messages._postMessage(message)
       .then(response => {
         socketIO.emit('new_message', response);
