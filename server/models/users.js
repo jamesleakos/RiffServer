@@ -43,7 +43,7 @@ module.exports = {
   },
 
   removeFriend: (user_id, friend_id) => {
-    const queryString = `DELETE FROM friends (user_id, friend_id) VALUES ($1, $2)`
+    const queryString = `DELETE FROM friends (user_id, friend_id) VALUES ($1, $2), ($2, $1)`
 
     return db.query(queryString, [user_id, friend_id])
       .catch((err) => {
