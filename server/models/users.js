@@ -42,6 +42,15 @@ module.exports = {
       } )
   },
 
+  removeFriend: (user_id, friend_id) => {
+    const queryString = `DELETE FROM friends (user_id, friend_id) VALUES ($1, $2)`
+
+    return db.query(queryString, [user_id, friend_id])
+      .catch((err) => {
+        return err;
+      } )
+  },
+
   getUserIdFromFirebaseId: (firebaseId) => {
     return db.query(`SELECT id FROM users WHERE firebase_id='${firebaseId}'`)
       .then(result => {
