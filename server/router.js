@@ -33,4 +33,7 @@ router.delete('/servers', controllers.servers.deleteServer);
 
 router.delete('/channels', controllers.channels.deleteChannel);
 
+router.put('/users/:user_id', controllers.users.updateOnline);
+
+
 module.exports = router;
