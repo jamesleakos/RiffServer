@@ -21,7 +21,7 @@ router.post('/users', controllers.users.createUser);
 
 router.post('/servers', controllers.servers.createServer);
 
-router.post('/servers/:server_id/:user_id', controllers.servers.inviteUser);
+router.post('/servers/:server_id/', controllers.servers.inviteUser);
 
 router.post('/channels', controllers.channels.createChannel);
 
