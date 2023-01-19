@@ -2,9 +2,9 @@ const models = require('../models');
 
 module.exports = {
   getUserId: (req, res) => {
-    models.users.getUserId (req.params.username)
-      .then((userInfo) => {
-        res.status(200).send(userInfo);
+    models.users.getUserId (req.params.firebase_id)
+      .then((userId) => {
+        res.status(200).send(userId);
       })
       .catch((err) => {
         res.status(501).send(err);
@@ -24,8 +24,8 @@ module.exports = {
   createUser: (req, res) => {
     console.log('create user');
     models.users.createUser(req.body.username, req.body.firebase_id)
-      .then(() => {
-        res.status(201).send();
+      .then((response) => {
+        res.status(201).send(response);
       })
       .catch((err) => {
         res.status(501).send(err);

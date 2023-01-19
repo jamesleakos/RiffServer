@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const controllers = require('./controllers');
 
-router.get('/users/:username', controllers.users.getUserId);
+router.get('/users/:firebase_id', controllers.users.getUserId);
 
 router.get('/messages/:server_id/:channel_id', controllers.messages.getMessages);
 
