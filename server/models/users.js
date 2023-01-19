@@ -12,7 +12,7 @@ module.exports = {
   },
 
   getFriends: (user_id) => {
-    return db.query(`SELECT id, username FROM users WHERE id IN (SELECT friend_id FROM friends WHERE user_id=${user_id})`)
+    return db.query(`SELECT id, username, online FROM users WHERE id IN (SELECT friend_id FROM friends WHERE user_id=${user_id})`)
       .then((result) => {
         return result.rows;
       })
@@ -50,6 +50,15 @@ module.exports = {
       .catch(err => {
         return err;
       })
-  }
+  },
+  getUsername: (id) => {
+    return db.query(`SELECT username FROM users WHERE id='${id}'`)
+      .then((result) => {
+        return result.rows[0].username;
+      })
+      .catch((err) => {
+        return err;
+      });
+  },
 
 }
