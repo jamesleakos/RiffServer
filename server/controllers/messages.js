@@ -13,21 +13,28 @@ module.exports = {
 
   getDirectMessages: async (req, res) => {
     // Verify the user's JWT token
-    try {
-      // Use the uid from the decoded token to retrieve the user's private data from other db
-      const userId = await models.users.getUserIdFromFirebaseId(req.headers.firebase_id);
+    // try {
+    //   // Use the uid from the decoded token to retrieve the user's private data from other db
+    //   // const userId = await models.users.getUserIdFromFirebaseId(req.headers.firebase_id);
 
-      models.messages.getDirectMessages(userId, req.params.recipient_id)
-        .then((directMessages) => {
-          res.status(200).send(directMessages)
-        })
-        .catch((err) => {
-          res.status(501).send(err)
-        })
+    //   models.messages.getDirectMessages(req.params.user_id, req.params.recipient_id)
+    //     .then((directMessages) => {
+    //       res.status(200).send(directMessages)
+    //     })
+    //     .catch((err) => {
+    //       res.status(501).send(err)
+    //     })
 
-    } catch (error) {
-      res.status(401).send('Unauthorized');
-    }
+    // } catch (error) {
+    //   res.status(401).send('Unauthorized');
+    // }
+    models.messages.getDirectMessages(req.params.user_id, req.params.recipient_id)
+      .then((directMessages) => {
+        res.status(200).send(directMessages)
+      })
+      .catch((err) => {
+        res.status(501).send(err)
+      })
   },
 
   // postMessage: (req, res) => {
