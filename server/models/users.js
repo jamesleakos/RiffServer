@@ -38,10 +38,10 @@ module.exports = {
     const queryString = `
     INSERT INTO friends (user_id, friend_id)
     VALUES ($1, (
-      SELECT id FROM users WHERE username = '$2')), ((SELECT id FROM users WHERE username = '$2'), $1)`;
+      SELECT id FROM users WHERE username = $2)), ((SELECT id FROM users WHERE username = $2), $1)`;
     return db.query(queryString, [user_id, friendUsername])
       .catch((err) => {
-        console.log('error adding friend: ', err.message);
+        console.log('error adding friend by username: ', err.message);
         return err;
       });
   },
