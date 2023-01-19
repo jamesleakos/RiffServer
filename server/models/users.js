@@ -38,15 +38,19 @@ module.exports = {
 
     return db.query(queryString, [user_id, friend_id])
       .catch((err) => {
+        console.log('error adding friend: ', err.message);
         return err;
       } )
   },
 
   removeFriend: (user_id, friend_id) => {
-    const queryString = `DELETE FROM friends (user_id, friend_id) VALUES ($1, $2), ($2, $1)`
+    const queryString = 'DELETE FROM friends WHERE user_id IN ($1, $2) AND friend_id IN ($1, $2)';
+    // console.log(user_id, friend_id);
+// 'DELETE FROM friends WHERE user_id = $1 AND friend_id = $2'
 
     return db.query(queryString, [user_id, friend_id])
       .catch((err) => {
+        console.log('error removing friend: ', err.message);
         return err;
       } )
   },
