@@ -59,10 +59,13 @@ module.exports = {
       })
   },
 
-  inviteUser: (server_id, user_id) => {
+  inviteUser: (server_id, username) => {
     const queryString = `INSERT INTO servers_users (user_id, server_id) VALUES ($1, $2)`
 
-    return db.query(queryString, [user_id, server_id])
+    return db.query(`SELECT id FROM users WHERE username='${username}'`)
+      .then((result) => {
+        return db.query(queryString, [result.rows[0].id, server_id])
+      })
       .catch((err) => {
         return err;
       })
