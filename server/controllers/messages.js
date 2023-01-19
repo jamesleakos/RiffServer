@@ -48,7 +48,6 @@ module.exports = {
         return models.users.getUsername(user_id)
           .then((result) => {
             let obj = {...newMessage, username: result, created_at: Date.now()};
-            console.log(obj)
             return obj;
           })
           .catch(() => {
