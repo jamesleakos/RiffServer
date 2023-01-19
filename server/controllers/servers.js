@@ -42,7 +42,7 @@ module.exports = {
   },
 
   inviteUser: (req, res) => {
-    models.servers.inviteUser(req.params.server_id, req.params.user_id)
+    models.servers.inviteUser(req.params.server_id, req.body.username)
       .then(() => {
         res.status(201).send();
       })
