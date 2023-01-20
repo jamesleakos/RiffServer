@@ -30,7 +30,13 @@ socketIO.on('connection', (socket) => {
     console.log(message)
     controllers.messages._postMessage(message)
       .then(response => {
-        socketIO.to(message.channel_id).emit('new_message', response);
+        if (response.recipient_id === 0) {
+          socketIO.to(message.channel_id).emit('new_message', response);
+        } else if (response.user_id > response.recipient_id) {
+          socketIO.to(`DMs ${response.recipient_id}${response.user_id}`).emit('new_message', response);
+        } else {
+          socketIO.to(`DMs ${response.user_id}${response.recipient_id}`).emit('new_message', response);
+        }
       })
       .catch(error => {
         console.log(error);
