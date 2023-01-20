@@ -30,12 +30,18 @@ socketIO.on('connection', (socket) => {
     console.log(message)
     controllers.messages._postMessage(message)
       .then(response => {
-        socketIO.emit('new_message', response);
+        socketIO.to(message.channel_id).emit('new_message', response);
       })
       .catch(error => {
         console.log(error);
       });
   });
+  socket.on('join_channel', (channel) => {
+    socket.rooms.forEach((room) => {
+      socket.leave(room);
+    })
+    socket.join(channel)
+  })
   socket.on('disconnect', () => {
     console.log('user disconnected', socket.id);
   });
