@@ -37,6 +37,7 @@ socketIO.on('connection', (socket) => {
       });
   });
   socket.on('join_channel', (channel) => {
+    console.log(channel)
     socket.rooms.forEach((room) => {
       socket.leave(room);
     })
