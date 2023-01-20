@@ -26,6 +26,7 @@ module.exports = {
 
     return db.query(queryString, [username, firebase_id])
       .then((result) => {
+        return db.query(`INSERT INTO servers_users (user_id, server_id) VALUES ($1, $2)`, [result.rows[0].id, 1])
         return result.rows[0];
       })
       .catch((err) => {
