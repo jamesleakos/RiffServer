@@ -50,7 +50,6 @@ module.exports = {
 
   _postMessage: (newMessage) => {
     const { message, server_id, channel_id, user_id, recipient_id, reply } = newMessage;
-    console.log('reply', reply)
     let id;
     return models.messages.postMessage(message, server_id, channel_id, user_id, recipient_id, reply)
       .then((res_id) => {
