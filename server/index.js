@@ -10,7 +10,7 @@ const controllers = require('./controllers');
 
 app.use(express.json());
 
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
+// app.use(morgan(':method :url :status :res[content-length] - :response-time ms'));
 
 app.use(cors());
 
@@ -27,7 +27,6 @@ const socketIO = require('socket.io')(server, {
 socketIO.on('connection', (socket) => {
   console.log("connected", socket.id)
   socket.on('message', (message) => {
-    console.log(message)
     controllers.messages._postMessage(message)
       .then(response => {
         if (response.recipient_id === 0) {
@@ -42,8 +41,8 @@ socketIO.on('connection', (socket) => {
         console.log(error);
       });
   });
+
   socket.on('join_channel', (channel) => {
-    console.log(channel)
     socket.rooms.forEach((room) => {
       socket.leave(room);
     })
