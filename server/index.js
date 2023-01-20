@@ -26,6 +26,7 @@ const socketIO = require('socket.io')(server, {
 
 socketIO.on('connection', (socket) => {
   console.log("connected", socket.id)
+  socket.join(1);
   socket.on('message', (message) => {
     controllers.messages._postMessage(message)
       .then(response => {
