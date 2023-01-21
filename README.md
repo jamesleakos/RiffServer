@@ -4,8 +4,7 @@
 Riff is a social networking mobile application that connects people together through instant messaging.
 
 <img src="https://user-images.githubusercontent.com/37193140/213892222-1e7017a4-b04a-4de1-b9c9-672c5da93c24.gif" width="240" height="500"/>
-![chat](https://user-images.githubusercontent.com/37193140/213892222-1e7017a4-b04a-4de1-b9c9-672c5da93c24.gif)
-![MenuDisplay](https://user-images.githubusercontent.com/37193140/213892264-dd976a2a-108c-430a-b350-47b6586b5914.gif)
+<img src="https://user-images.githubusercontent.com/37193140/213892264-dd976a2a-108c-430a-b350-47b6586b5914.gif" width="240" height="500"/>
 
 ## Table of Contents
 - [Repo Structure](#repo-structure)
