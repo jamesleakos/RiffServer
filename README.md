@@ -1,5 +1,8 @@
 # RiffServer
 
+#Tech Stack
+![ReactNative](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
+
 ## Description
 Riff is a messaging application built for mobile, inspired by Slack. Users chat with others in shared servers across a number of topic specific channels. They can also directly message other users.
 
